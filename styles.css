@@ -1,0 +1,38 @@
+html,body{
+    background-color: #303952;
+}
+
+
+.card{
+    width: 420px;
+    margin-top: 10%;
+    background-color: #596275;
+}
+
+.card-header{
+    color: white;
+}
+
+#login_btn, #register_btn{
+    color: black;
+    background-color: #e15f41;
+    width: 85px;
+}
+
+#login_btn, #register_btn:hover{
+    color: black;
+    background-color: #e19b2a;
+}
+
+.links {
+    color: white;
+    text-align: center;
+}
+
+#logout_btn{
+    padding: 5px;
+}
+
+#logout_btn:hover{
+    color: black;
+}
