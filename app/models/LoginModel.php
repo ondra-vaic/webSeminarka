@@ -1,10 +1,12 @@
 <?php
 
 
-class User extends Model
+class LoginModel extends Model
 {
+
     public function __construct()
     {
         parent::__construct();
     }
+
 }
