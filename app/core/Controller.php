@@ -11,16 +11,16 @@ class Controller
         $this->model = $this->instantiateIfExists($modelPath, $model);
     }
 
-    protected function createView($view, $data=[]){
-        $viewPath = VIEWS . $view . '.php';
-        $this->view = $this->instantiateIfExists($viewPath, $view, $data);
+    protected function createView($viewClass, $view){
+        $viewPath = VIEWS . $viewClass . '.php';
+        $this->view = $this->instantiateIfExists($viewPath, $viewClass, $view);
     }
 
-    private function instantiateIfExists($path, $file, $data=[]){
+    private function instantiateIfExists($path, $file, $param=null){
         if(file_exists($path)){
             require_once $path;
-            if(!empty($data))
-                return new $file($data);
+            if($param != null)
+                return new $file($param);
             return new $file();
         }else{
             throw new Exception($path . ' does not exist');

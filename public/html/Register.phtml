@@ -5,54 +5,65 @@
                 <h3>Register</h3>
             </div>
             <div class="card-body">
-                <form action="/<?php echo ROOT;?>/Register/Register" method="post">
+                <form action="/{{constant('ROOT')}}/Register/Register" method="post">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"></span>
                         </div>
-                        <input type="text" name="username" class="form-control" placeholder="username" >
+                        <input type="text" name="userName" class="form-control" placeholder="User name" value="{{lastInput.userName}}" required>
 
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"></i></span>
                         </div>
-                        <input type="password" name="password" class="form-control" placeholder="password" >
+                        <input type="password" name="password" class="form-control" placeholder="Password" value="" required>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"></i></span>
                         </div>
-                        <input type="password" name="confirmpassword" class="form-control" placeholder="confirm password" >
+                        <input type="password" name="confirmPassword" class="form-control" placeholder="Confirm password" value="" required>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"></span>
                         </div>
-                        <input type="text" name="firstname" class="form-control" placeholder="first name" >
+                        <input type="text" name="firstName" class="form-control" placeholder="First name" value="{{lastInput.firstName}}" required>
                     </div>
 
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"></span>
                         </div>
-                        <input type="email" name="email" class="form-control" placeholder="e-mail" >
+                        <input type="email" name="email" class="form-control" placeholder="E-mail" value="{{lastInput.email}}" required>
                     </div>
 
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"></span>
                         </div>
-                        <input type="text" name="organization" class="form-control" placeholder="organization" >
+                        <input type="text" name="organization" class="form-control" placeholder="Organization" value="{{lastInput.organization}}" required>
                     </div>
+
                     <div class="form-group">
-                        <input type="submit" name="register_btn" id="register_btn" value="Register" class="btn float-right">
+                        <input type="submit" name="register_btn" id="register_btn" value="Register" class="btn float-right"><br>
                     </div>
                 </form>
+
+
+                {% for error in errors %}
+                    <div class="alert alert-danger float-left w-100" role="alert">{{ error }}</div><br>
+                {% endfor %}
+
+                {% if success is not empty %}
+                    <div class="alert alert-success float-left w-100">{{ success[0] }}</div><br>
+                {% endif %}
+
             </div>
             <div class="card-footer">
                 <div class="links">
-                    Already have an account?<a href="Signin.phtml">  Sign in</a>
+                    Already have an account?<a href="/{{constant('ROOT')}}/SignIn">  Sign in</a>
                 </div>
             </div>
         </div>

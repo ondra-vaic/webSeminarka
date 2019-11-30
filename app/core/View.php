@@ -3,30 +3,35 @@
 
 abstract class View
 {
-    protected $view = 'E404';
-    protected $data;
+    protected $view;
+    private $twig;
 
-    public function __construct($data=[])
+    public function __construct($view = 'E404')
     {
-        $this->data = $data;
+        $this->view = $view;
+        $loader = new \Twig\Loader\FilesystemLoader('html');
+        $this->twig = new \Twig\Environment($loader, []);
+    }
+
+    protected function twigRender($view, $data = []){
+        echo $this->twig->render($view.'.phtml', $data);
     }
 
     protected function header(){
-        require_once HEADER;
+        $this->twigRender(HEADER);
     }
 
     protected function footer(){
-        require_once FOOTER;
+        $this->twigRender(FOOTER);
     }
 
-    protected function content(){
-        $viewPath = VIEWS_HTML . $this->view . '.phtml';
-        require_once $viewPath;
+    protected function content($data){
+        $this->twigRender($this->view, $data);
     }
 
     public function render($data = []){
         $this->header();
-        $this->content();
+        $this->content($data);
         $this->footer();
     }
 

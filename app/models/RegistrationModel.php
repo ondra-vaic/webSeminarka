@@ -1,7 +1,7 @@
 <?php
 
 
-class UserRegistrationModel extends Model
+class RegistrationModel extends Model
 {
     public $userName;
     public $password;
@@ -16,7 +16,7 @@ class UserRegistrationModel extends Model
     }
 
     public function Register(){
-        Database::GetInstance()->Insert(USER_TABLE,
+        return Database::GetInstance()->Insert(USER_TABLE,
             [$this->userName,
              Utils::Hash($this->password),
              $this->firstName,
