@@ -1,7 +1,7 @@
 <?php
 
 
-class RegistrationModel extends Model
+class RegistrationModel extends MenuModel
 {
     public $userName;
     public $password;

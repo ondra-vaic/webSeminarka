@@ -26,7 +26,7 @@ class SignIn Extends Controller
     }
 
     private function signInUser($id){
-        $_SESSION['loggedUserId'] = $id;
+        $_SESSION['userId'] = $id;
         Utils::Redirect('Home');
     }
 

@@ -1,11 +1,12 @@
 <?php
 
 
-class Home Extends Controller
+class Home Extends MenuController
 {
     public function __construct()
     {
-        $this->createModel('SimpleModel');
+        $this->createModel('SimpleMenuModel');
         $this->createView('MenuView', 'Home');
+        $this->initMenu();
     }
 }

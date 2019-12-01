@@ -12,7 +12,7 @@
                 <a class="nav-link" href="#">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/{{constant('ROOT')}}/Submission">Submission</a>
+                <a class="nav-link" href="/{{constant('ROOT')}}/Submissions">My Submissions</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
@@ -20,8 +20,16 @@
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <form action="index.php" method="post">
-                    <input type="submit" class="nav-link btn btn-outline-light" id="logout_btn" value="Logout">
+                <form action="/{{constant('ROOT')}}/{{data.currentTab}}/LogOut" method="post">
+                    <input type="submit" class="nav-link btn btn-outline-light" id="logOutBtn" value="Log out">
+                </form>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <form action="/{{constant('ROOT')}}/SignIn" method="post">
+                    <input type="submit" class="nav-link btn btn-outline-light" id="logInBtn" value="Sign in">
                 </form>
             </li>
         </ul>

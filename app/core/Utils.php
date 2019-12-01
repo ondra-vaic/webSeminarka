@@ -14,6 +14,18 @@ class Utils
         return '';
     }
 
+    public static function IsLoggedIn(){
+        if(isset($_SESSION['userId'])){
+           return $_SESSION['userId'] >= 0;
+        }
+
+        return false;
+    }
+
+    public static function UserId(){
+        return $_SESSION['userId'];
+    }
+
     public static function GetUserByUserName($userName){
         return Database::GetInstance()->Select(USER_TABLE, '*', 'username = ?', [$userName]);
     }

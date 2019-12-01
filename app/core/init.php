@@ -8,6 +8,8 @@ require_once 'View.php';
 require_once 'Model.php';
 require_once 'Database.php';
 require_once 'Validator.php';
+require_once 'MenuController.php';
+require_once 'MenuModel.php';
 require_once 'Utils.php';
 require_once 'C:/Users/me/vendor/autoload.php';
 

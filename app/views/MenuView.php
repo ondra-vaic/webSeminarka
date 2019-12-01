@@ -3,13 +3,13 @@
 
 class MenuView extends View
 {
-    private function menu(){
-        $this->twigRender(MENU);
+    private function menu($data){
+        $this->twigRender(MENU, $data);
     }
 
     public function render($data = []){
         $this->header();
-        $this->menu();
+        $this->menu($data);
         $this->content($data);
         $this->footer();
     }

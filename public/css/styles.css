@@ -30,10 +30,11 @@ html,body{
     text-align: center;
 }
 
-#logout_btn{
+#logOutBtn, #logInBtn{
     padding: 5px;
+    width: 100px;
 }
 
-#logout_btn:hover{
+#logOutBtn:hover{
     color: black;
 }
