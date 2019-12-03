@@ -13,6 +13,12 @@ class RegistrationModel extends MenuModel
     public function __construct()
     {
         parent::__construct();
+        $this->userName = Utils::Sanitaze(Utils::SafePost('userName'));
+        $this->password = Utils::SafePost('password');
+        $this->confirmPassword = Utils::SafePost('confirmPassword');
+        $this->firstName = Utils::Sanitaze(Utils::SafePost('firstName'));
+        $this->email = Utils::Sanitaze(Utils::SafePost('email'));
+        $this->organization = Utils::Sanitaze(Utils::SafePost('organization'));
     }
 
     public function Register(){

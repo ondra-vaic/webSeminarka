@@ -20,6 +20,24 @@ class Validator
         return -1;
     }
 
+    public static function IsUsersSubmission($submissionId){
+        $userId = Database::GetInstance()->Select(
+            SUBMISSIONS_TABLE, 'userId', 'id = ?', [$submissionId]);
+
+        if(!isset($userId[0]))
+            return false;
+
+        return $userId[0]->userId === Utils::UserId();
+    }
+
+    public static function IsPdf($file){
+        return $file['type'] == "application/pdf";
+    }
+
+    public static function IsUploadSize($file){
+        return $file['size'] < MAX_UPLOAD_SIZE;
+    }
+
     public static function ValidateInputLength($fieldName, $string, $min, $max){
         $stringLength = strlen($string);
 

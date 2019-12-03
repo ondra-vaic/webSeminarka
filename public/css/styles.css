@@ -1,7 +1,22 @@
 html,body{
-    background-color: #308952;
+    background-color: #3b8689;
 }
 
+hr {
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.jumbotron{
+    background-color: #296163;
+}
+
+.submission-input{
+    margin: 10px;
+}
+
+.submission-input-label, .white-text{
+    color: #e6e6e6;
+}
 
 .card{
     width: 420px;
@@ -13,14 +28,14 @@ html,body{
     color: white;
 }
 
-#login_btn, #register_btn{
+.confirmButton{
     color: black;
     background-color: #e15f41;
     width: 85px;
     margin-bottom: 5px;
 }
 
-#login_btn:hover, #register_btn:hover{
+.confirmButton:hover{
     color: black;
     background-color: #e19b2a;
 }

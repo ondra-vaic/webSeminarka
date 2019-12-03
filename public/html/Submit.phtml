@@ -1,0 +1,46 @@
+
+<div class="jumbotron">
+    <h2>NEW SUBMISSIONS</h2>
+    <hr>
+        <div class="row">
+            <div class="col-lg-6">
+            <form action="/{{constant('ROOT')}}/Submit/Submit" method="post" enctype="multipart/form-data">
+
+            <div class="form-group submission-input">
+                    <label for="title" class="submission-input-label">TITLE:</label>
+                    <input type="text" name="title" class="form-control" id="title" value="{{lastInput.title}}" required>
+                </div>
+
+                <div class="form-group submission-input">
+                    <label for="authors" class="submission-input-label">AUTHORS:</label>
+                    <input type="text" name="authors" class="form-control" id="authors" value="{{lastInput.authors}}" required>
+                </div>
+
+                <div class="form-group submission-input">
+                    <label for="abstract" class="submission-input-label">ABSTRACT:</label>
+                    <textarea name="abstract" class="form-control" id="abstract" rows="10" required>{{lastInput.abstract}}</textarea>
+                </div>
+
+                <div class="form-group submission-input">
+                    <label for="pdfSubmission" class="submission-input-label">PDF FILE:</label>
+                    <input type="file" name="pdf" size="50" />
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" name="confirmButton" value="Upload" class="btn float-right confirmButton" required><br>
+                </div>
+            </form>
+
+            {% for error in errors %}
+                <div class="alert alert-danger float-left w-100" role="alert">{{ error }}</div><br>
+            {% endfor %}
+
+            {% if success is defined %}
+                <div class="alert alert-success float-left w-100">{{ success }}</div><br>
+            {% endif %}
+            </div>
+        </div>
+</div>
+
+
+

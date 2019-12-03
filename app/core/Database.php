@@ -9,7 +9,7 @@ class Database
     private function __construct()
     {
         try{
-            $this->pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USERNAME,DB_PASSWORD);
+            $this->pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=UTF8', DB_USERNAME,DB_PASSWORD);
         }catch (PDOException $e){
             die($e->getMessage());
         }
@@ -21,6 +21,11 @@ class Database
         }
 
         return Database::$instance;
+    }
+
+    public function Remove($table, $conditions, $params){
+        $query = 'DELETE FROM ' . $table . ' WHERE ' . $conditions;
+        return $this->runQuery($query, $params);
     }
 
     public function Insert($table, $values){
@@ -45,6 +50,7 @@ class Database
             if($query->execute()){
                 return $query->fetchAll(PDO::FETCH_OBJ);
             }
+
         }
 
         return false;

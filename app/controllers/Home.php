@@ -1,12 +1,16 @@
 <?php
 
 
-class Home Extends MenuController
+class Home Extends Controller
 {
     public function __construct()
     {
         $this->createModel('SimpleMenuModel');
         $this->createView('MenuView', 'Home');
-        $this->initMenu();
+    }
+
+    public function LogOut(){
+        $_SESSION['userId'] = -1;
+        Utils::Redirect('Home');
     }
 }

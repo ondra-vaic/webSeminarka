@@ -1,1 +1,58 @@
-<h1>uahfuaf</h1>
+
+<div class="jumbotron">
+    <h2>
+        LIST OF SUBMISSIONS
+    </h2>
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <table class="table table-hover table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                {% if submissions|length > 0 %}
+                    {% for i in 0..submissions|length-1 %}
+
+                    <tr>
+                        <th scope="row">{{i}}</th>
+                        <td>
+                            <a href="/{{constant('ROOT')}}/Submission/ShowSubmission/{{submissions[i].id}}">{{submissions[i].title}}</a>
+                        </td>
+                        <td>{{submissions[i].author}}</td>
+                        <td>
+                            <form action="/{{constant('ROOT')}}/Submissions/Delete" method="post">
+                                <input type="text" name="submissionToDeleteId" hidden value="{{submissions[i].id}}">
+                                <input type="submit" class="nav-link btn btn-outline-light" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="links text-left">
+        <a href="/{{constant('ROOT')}}/Submit">New Submission</a>
+    </div>
+
+    {% for error in errors %}
+        <div class="alert alert-danger float-left w-100" role="alert">{{ error }}</div><br>
+    {% endfor %}
+
+    {% if success is defined %}
+        <div class="alert alert-success float-left w-100">{{ success }}</div><br>
+    {% endif %}
+
+</div>

@@ -11,24 +11,14 @@ class Register extends Controller
     }
 
     public function Register(){
-        $this->setModel();
         if($this->validateInput()){
-            if($this->registerUser()){
+            if($this->registerUser() !== false){
                 $this->getModel()->SetElement('success', ['Account has been created.']);
             }
             else{
                 $this->getModel()->SetElement('errors', ['There has been a technical failure, please try again.']);
             }
         }
-    }
-
-    private function setModel(){
-        $this->getModel()->userName = Utils::Sanitaze(Utils::SafePost('userName'));
-        $this->getModel()->password = Utils::SafePost('password');
-        $this->getModel()->confirmPassword = Utils::SafePost('confirmPassword');
-        $this->getModel()->firstName = Utils::Sanitaze(Utils::SafePost('firstName'));
-        $this->getModel()->email = Utils::Sanitaze(Utils::SafePost('email'));
-        $this->getModel()->organization = Utils::Sanitaze(Utils::SafePost('organization'));
     }
 
     private function registerUser(){

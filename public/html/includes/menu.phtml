@@ -6,26 +6,46 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
     </button>
+
+    <h1>{{authorization}}</h1>
+
+
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/{{constant('ROOT')}}/Submissions">My Submissions</a>
-            </li>
+
+
+            {% if authorization == 0 %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/{{constant('ROOT')}}/Submissions">My Submissions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/{{constant('ROOT')}}/Submit">Submit</a>
+                </li>
+            {% endif %}
+
+            {% if authorization == 1 %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/{{constant('ROOT')}}/SubmissionsReview">Submissions to Reviews</a>
+                </li>
+            {% endif %}
+
+
             <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
             </li>
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <form action="/{{constant('ROOT')}}/{{data.currentTab}}/LogOut" method="post">
+                <form action="/{{constant('ROOT')}}/Home/LogOut" method="post">
                     <input type="submit" class="nav-link btn btn-outline-light" id="logOutBtn" value="Log out">
                 </form>
             </li>
         </ul>
 
+        {% if authorization < 0 %}
         <ul class="navbar-nav">
             <li class="nav-item">
                 <form action="/{{constant('ROOT')}}/SignIn" method="post">
@@ -33,5 +53,6 @@
                 </form>
             </li>
         </ul>
+        {% endif %}
     </div>
 </nav>

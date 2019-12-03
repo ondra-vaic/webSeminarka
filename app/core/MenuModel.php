@@ -3,7 +3,13 @@
 
 class MenuModel extends Model
 {
-    public function getAuthorization(){
+    public function __construct()
+    {
+        parent::__construct();
+        $this->data['authorization'] = $this->GetAuthorization();
+    }
+
+    public function GetAuthorization(){
         if(!Utils::IsLoggedIn()){
             return -1;
         }

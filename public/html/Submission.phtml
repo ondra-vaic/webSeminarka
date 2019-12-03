@@ -1,0 +1,22 @@
+
+<div class="jumbotron">
+    <h2 class="white-text">{{submission.title}}</h2>
+    <h3 class="white-text">{{submission.author}}</h3>
+    <div class="row">
+        <div class="col-lg-6">
+            <p class="text-left white-text">
+                {{submission.abstract}}
+            </p>
+        </div>
+    </div>
+
+    <div class="links text-left">
+        <a href="/{{constant('ROOT')}}/Submission/Download/{{submission.id}}">{{submission.aliasName}}</a>
+    </div>
+
+    <br>
+
+    <div class="links text-left">
+        <a href="/{{constant('ROOT')}}/Submissions"><- Back</a>
+    </div>
+</div>
