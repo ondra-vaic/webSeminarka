@@ -6,6 +6,10 @@ class SignIn Extends Controller
 
     public function __construct()
     {
+        if(Utils::IsLoggedIn()){
+            Utils::Redirect('Home');
+        }
+
         $this->createModel('SimpleModel');
         $this->createView('SimpleView', 'SignIn');
     }

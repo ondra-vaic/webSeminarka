@@ -1,42 +1,43 @@
-
-
-
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <h1>{{authorization}}</h1>
-
-
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+            <li class="nav-item {{HomeActive}}">
+                <a class="nav-link" href="/{{constant('ROOT')}}/Home">Home</a>
             </li>
 
 
             {% if authorization == 0 %}
-                <li class="nav-item">
+                <li class="nav-item {{SubmissionsActive}}">
                     <a class="nav-link" href="/{{constant('ROOT')}}/Submissions">My Submissions</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{SubmitActive}}">
                     <a class="nav-link" href="/{{constant('ROOT')}}/Submit">Submit</a>
                 </li>
             {% endif %}
 
             {% if authorization == 1 %}
-                <li class="nav-item">
+                <li class="nav-item {{SubmissionsReviewActive}}">
                     <a class="nav-link" href="/{{constant('ROOT')}}/SubmissionsReview">Submissions to Reviews</a>
                 </li>
             {% endif %}
 
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+            {% if authorization == 2 %}
+            <li class="nav-item {{SetRightsActive}}">
+                <a class="nav-link" href="/{{constant('ROOT')}}/SetRights">Set Rights</a>
             </li>
+
+            <li class="nav-item {{AssignToReviewActive}}">
+                <a class="nav-link" href="/{{constant('ROOT')}}/AssignToReview">Assign to Review</a>
+            </li>
+            {% endif %}
         </ul>
+
+        {% if authorization >= 0 %}
         <ul class="navbar-nav">
             <li class="nav-item">
                 <form action="/{{constant('ROOT')}}/Home/LogOut" method="post">
@@ -44,6 +45,7 @@
                 </form>
             </li>
         </ul>
+        {% endif %}
 
         {% if authorization < 0 %}
         <ul class="navbar-nav">

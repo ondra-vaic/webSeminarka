@@ -21,6 +21,11 @@ class RegistrationModel extends MenuModel
         $this->organization = Utils::Sanitaze(Utils::SafePost('organization'));
     }
 
+    public function IsUserNameUsed(){
+        $user = Utils::GetUserByUserName($this->userName);
+        return $user != [] ? 'User name is already used' : null;
+    }
+
     public function Register(){
         return Database::GetInstance()->Insert(USER_TABLE,
             [$this->userName,
@@ -29,7 +34,7 @@ class RegistrationModel extends MenuModel
              $this->email,
              $this->organization,
                 date('Y-m-d H:i:s'),
-                0,
+                Utils::GetIdOfRightsId(0),
                 null]);
     }
 }

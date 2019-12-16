@@ -33,17 +33,10 @@ class Submit extends Controller
         $abstract = $this->getModel()->abstract;
         $file = $this->getModel()->file;
 
-        if($title == ''){
-            $errors[] = 'Title is missing';
-        }
 
-        if($authors == ''){
-            $errors[] = 'Author is missing';
-        }
-
-        if($abstract == ''){
-            $errors[] = 'Abstract is missing';
-        }
+        $errors[] = Validator::ValidateInputLength('Field title', $title, 1, 255);
+        $errors[] = Validator::ValidateInputLength('Field authors', $authors, 1, 255);
+        $errors[] = Validator::ValidateInputLength('Field abstract', $abstract, 1, 2047);
 
         if($file !== null){
 
@@ -62,6 +55,8 @@ class Submit extends Controller
         else{
             $errors[] = 'No file uploaded';
         }
+
+        Utils::ClearNulls($errors);
 
         $this->getModel()->SetElement('errors', $errors);
         return count($errors) == 0;

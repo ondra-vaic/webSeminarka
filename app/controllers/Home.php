@@ -7,6 +7,7 @@ class Home Extends Controller
     {
         $this->createModel('SimpleMenuModel');
         $this->createView('MenuView', 'Home');
+        $this->getModel()->SetElement('page', 'Home');
     }
 
     public function LogOut(){

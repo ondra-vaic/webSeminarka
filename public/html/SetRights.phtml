@@ -1,0 +1,54 @@
+<div class="jumbotron">
+    <h2>
+        REGISTERED USERS
+    </h2>
+    <hr>
+
+
+    <div class="row">
+        <div class="col-lg-6">
+            <table class="table table-hover table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Rights</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% if users|length > 0 %}
+                        {% for i in 0..users|length-1 %}
+                            {% if users[i].tag != "Admin" %}
+                                <tr>
+                                    <th scope="row">{{i}}</th>
+                                    <td>{{users[i].username}}</td>
+                                    <td>{{users[i].email}}</td>
+                                    <td>
+
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                {{users[i].tag}}
+                                            </button>
+
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="/{{constant('ROOT')}}/SetRights/SetUserRight/{{users[i].id}}">User</a>
+                                                <a class="dropdown-item" href="/{{constant('ROOT')}}/SetRights/SetReviewerRight/{{users[i].id}}">Reviewer</a>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% for error in errors %}
+        <div class="alert alert-danger float-left w-100" role="alert">{{ error }}</div><br>
+    {% endfor %}
+
+</div>

@@ -30,12 +30,33 @@ class Utils
         return Database::GetInstance()->Select(USER_TABLE, '*', 'username = ?', [$userName]);
     }
 
+    public static function GetAuthorization(){
+        if(!Utils::IsLoggedIn()){
+            return -1;
+        }
+
+        $rightsId = Database::GetInstance()->Select(USER_TABLE, 'rightsId', 'id = ?', [Utils::UserId()])[0]->rightsId;
+        return Database::GetInstance()->Select(RIGHTS_TABLE, 'rightsId', 'id = ?', [$rightsId])[0]->rightsId;
+    }
+
+    public static function GetIdOfRightsId($rights){
+        return Database::GetInstance()->Select(RIGHTS_TABLE, 'id', 'rightsId = ?', [$rights])[0]->id;
+    }
+
     public static function Redirect($url){
         header('Location: /' . ROOT . '/' . $url);
     }
 
     public static function Hash($string){
         return password_hash($string, PASSWORD_DEFAULT);
+    }
+
+    public static function ClearNulls(&$errors){
+        for($i = count($errors) - 1; $i >= 0; $i--){
+            if($errors[$i] === null){
+                unset($errors[$i]);
+            }
+        }
     }
 
     public static function GetNQuestionMarks($n){

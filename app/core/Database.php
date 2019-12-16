@@ -25,22 +25,22 @@ class Database
 
     public function Remove($table, $conditions, $params){
         $query = 'DELETE FROM ' . $table . ' WHERE ' . $conditions;
-        return $this->runQuery($query, $params);
+        return $this->RunQuery($query, $params);
     }
 
     public function Insert($table, $values){
         $questionMarks = Utils::GetNQuestionMarks(count($values));
         $query = 'INSERT INTO ' . $table  . ' VALUES (' . $questionMarks . ')';
 
-        return $this->runQuery($query, $values);
+        return $this->RunQuery($query, $values);
     }
 
     public function Select($table, $column, $conditions, $params){
         $query = 'SELECT ' . $column . ' FROM ' . $table . ' WHERE ' . $conditions;
-        return $this->runQuery($query, $params);
+        return $this->RunQuery($query, $params);
     }
 
-    private function runQuery($query, $params){
+    public function RunQuery($query, $params){
         $query = $this->pdo->prepare($query);
         if($query){
             for ($i = 0; $i < count($params); $i++) {
@@ -50,9 +50,7 @@ class Database
             if($query->execute()){
                 return $query->fetchAll(PDO::FETCH_OBJ);
             }
-
         }
-
         return false;
     }
 }

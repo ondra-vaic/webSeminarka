@@ -3,11 +3,6 @@
 
 class Validator
 {
-    public static function ValidateUserNameUsed($userName){
-        $user = Utils::GetUserByUserName($userName);
-        return $user !== null ? 'User name is already used' : null;
-    }
-
     public static function ValidateSignInInfo($userName, $password){
         $user = Utils::GetUserByUserName($userName);
 

@@ -28,7 +28,7 @@ class Register extends Controller
     private function validateInput(){
         $errors = [];
 
-        $errors[] = Validator::ValidateUserNameUsed($this->getModel()->userName);
+        $errors[] = $this->getModel()->IsUserNameUsed();
         $errors[] = Validator::ValidateInputLength('User name', $this->getModel()->userName, 3, 50);
         $errors[] = Validator::ValidateInputLength('Password', $this->getModel()->password, 8, INF);
         $errors[] = Validator::ValidateInputLength('First name', $this->getModel()->firstName, 0, 128);
@@ -39,11 +39,7 @@ class Register extends Controller
             $errors[] = 'Passwords do not match.';
         }
 
-        for($i = count($errors) - 1; $i >= 0; $i--){
-            if($errors[$i] === null){
-                unset($errors[$i]);
-            }
-        }
+        Utils::ClearNulls($errors);
 
         $this->getModel()->SetElement('lastInput',
             ['userName' => $this->getModel()->userName,

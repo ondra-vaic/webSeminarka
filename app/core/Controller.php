@@ -36,6 +36,7 @@ class Controller
     }
 
     public function Show(){
+        $this->getModel()->SetElement(get_class($this) . 'Active', 'active');
         $this->getView()->render($this->getModel()->GetData());
     }
 }
