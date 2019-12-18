@@ -19,11 +19,6 @@ class SetRightsModel extends MenuModel
     }
 
     public function SetRights($userId, $rightsId){
-        if(!ctype_digit($userId))
-        {
-            return false;
-        }
-
         return Database::GetInstance()->RunQuery('UPDATE ' . USER_TABLE . ' SET rightsId = ' . $rightsId . ' WHERE id = ?',  [$userId]);
     }
 }

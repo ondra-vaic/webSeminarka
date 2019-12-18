@@ -46,10 +46,15 @@ hr {
 }
 
 #logOutBtn, #logInBtn{
+    margin-top: 10px;
     padding: 5px;
     width: 100px;
 }
 
 #logOutBtn:hover{
     color: black;
+}
+
+.assignToReviewTableHeader{
+    text-align: center
 }

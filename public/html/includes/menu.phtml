@@ -9,20 +9,19 @@
                 <a class="nav-link" href="/{{constant('ROOT')}}/Home">Home</a>
             </li>
 
-
             {% if authorization == 0 %}
-                <li class="nav-item {{SubmissionsActive}}">
-                    <a class="nav-link" href="/{{constant('ROOT')}}/Submissions">My Submissions</a>
-                </li>
-                <li class="nav-item {{SubmitActive}}">
-                    <a class="nav-link" href="/{{constant('ROOT')}}/Submit">Submit</a>
-                </li>
+            <li class="nav-item {{SubmissionsActive}}">
+                <a class="nav-link" href="/{{constant('ROOT')}}/Submissions">My Submissions</a>
+            </li>
+            <li class="nav-item {{SubmitActive}}">
+                <a class="nav-link" href="/{{constant('ROOT')}}/Submit">Submit</a>
+            </li>
             {% endif %}
 
             {% if authorization == 1 %}
-                <li class="nav-item {{SubmissionsReviewActive}}">
-                    <a class="nav-link" href="/{{constant('ROOT')}}/SubmissionsReview">Submissions to Reviews</a>
-                </li>
+            <li class="nav-item {{SubmissionsReviewActive}}">
+                <a class="nav-link" href="/{{constant('ROOT')}}/SubmissionsReview">Submissions to Reviews</a>
+            </li>
             {% endif %}
 
 
@@ -35,26 +34,30 @@
                 <a class="nav-link" href="/{{constant('ROOT')}}/AssignToReview">Assign to Review</a>
             </li>
             {% endif %}
+
+            <li class="nav-item {{UserInfoActive}}">
+                <a class="nav-link" href="/{{constant('ROOT')}}/UserInfoReview">
+                    {{name}} ({{authorizationTag}})
+                </a>
+            </li>
         </ul>
 
-        {% if authorization >= 0 %}
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ">
+            {% if authorization >= 0 %}
             <li class="nav-item">
                 <form action="/{{constant('ROOT')}}/Home/LogOut" method="post">
                     <input type="submit" class="nav-link btn btn-outline-light" id="logOutBtn" value="Log out">
                 </form>
             </li>
-        </ul>
-        {% endif %}
+            {% endif %}
 
-        {% if authorization < 0 %}
-        <ul class="navbar-nav">
+            {% if authorization < 0 %}
             <li class="nav-item">
                 <form action="/{{constant('ROOT')}}/SignIn" method="post">
                     <input type="submit" class="nav-link btn btn-outline-light" id="logInBtn" value="Sign in">
                 </form>
             </li>
+            {% endif %}
         </ul>
-        {% endif %}
     </div>
 </nav>

@@ -40,7 +40,7 @@ class Database
         return $this->RunQuery($query, $params);
     }
 
-    public function RunQuery($query, $params){
+    public function RunQuery($query, $params, $asArray = false){
         $query = $this->pdo->prepare($query);
         if($query){
             for ($i = 0; $i < count($params); $i++) {
@@ -48,6 +48,9 @@ class Database
             }
 
             if($query->execute()){
+                if($asArray){
+                    return $query->fetchAll(PDO::FETCH_ASSOC);
+                }
                 return $query->fetchAll(PDO::FETCH_OBJ);
             }
         }

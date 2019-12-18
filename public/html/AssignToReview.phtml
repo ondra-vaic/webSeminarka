@@ -1,0 +1,125 @@
+<div class="jumbotron">
+    <h2>
+        LIST OF SUBMISSIONS
+    </h2>
+    <hr>
+
+
+    <div class="row">
+        <div class="col-xl-10 col-lg-12 col-md-12 table-responsive">
+            <table class="table table-hover table-dark">
+
+                <tr>
+                    <th rowspan="2" class="assignToReviewTableHeader">#</th>
+                    <th rowspan="2" class="assignToReviewTableHeader">Title</th>
+                    <th rowspan="2" class="assignToReviewTableHeader">Authors</th>
+                    <th colspan="8" class="assignToReviewTableHeader">Review</th>
+                    <th rowspan="2" class="assignToReviewTableHeader">Decision</th>
+                    <th rowspan="2" class="assignToReviewTableHeader">Accept</th>
+                    <th rowspan="2" class="assignToReviewTableHeader">Deny</th>
+                </tr>
+
+                <tr>
+                    <th>Reviewer</th>
+                    <th>Orig.</th>
+                    <th>Theme</th>
+                    <th>Tech.</th>
+                    <th>Lang.</th>
+                    <th>Rec.</th>
+                    <th>Total</th>
+                    <th>Delete</th>
+                </tr>
+
+                {% if submissions|length > 0 %}
+                    {% for i in 0..submissions|length-1 %}
+                        <tr>
+                            <th rowspan="3">{{i}}</th>
+                            <td rowspan="3">{{submissions[i].title}}</td>
+                            <td rowspan="3">{{submissions[i].authors}}</td>
+
+                            {% if submissions[i].reviews|length > 0 %}
+                                {% for j in 0..submissions[i].reviews|length-1 %}
+                                    {% if j!=0 %}
+                                        <tr>
+                                    {% endif %}
+                                    <td>{{submissions[i].reviews[j].reviewer}}</td>
+                                    <td>{{submissions[i].reviews[j].originality}}</td>
+                                    <td>{{submissions[i].reviews[j].topic}}</td>
+                                    <td>{{submissions[i].reviews[j].technicalQuality}}</td>
+                                    <td>{{submissions[i].reviews[j].languageQuality}}</td>
+                                    <td>{{submissions[i].reviews[j].recommended}}</td>
+                                    <td>{{submissions[i].reviews[j].total}}</td>
+                                    <td>
+                                        <form action="/{{constant('ROOT')}}/AssignToReview/RemoveReview" method="post">
+                                            <input type="text" name="reviewToRemoveId" hidden value="{{submissions[i].reviews[j].id}}">
+                                            <input type="submit" class="nav-link btn btn-outline-light" value="Remove">
+                                        </form>
+                                    </td>
+                                    {% if j==0 %}
+                                        <td rowspan="3">
+                                            {{submissions[i].accepted}}
+                                        </td>
+                                        <td rowspan="3">
+                                            <form action="/{{constant('ROOT')}}/AssignToReview/Accept" method="post" >
+                                                <input type="text" name="submissionToAcceptId" hidden value="{{submissions[i].id}}">
+                                                <input type="submit" class="nav-link btn btn-outline-light" value="Accept">
+                                            </form>
+                                        </td>
+                                        <td rowspan="3">
+                                            <form action="/{{constant('ROOT')}}/AssignToReview/Deny" method="post">
+                                                <input type="text" name="submissionToDenyId" hidden value="{{submissions[i].id}}">
+                                                <input type="submit" class="nav-link btn btn-outline-light" value="Deny">
+                                            </form>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if (2-submissions[i].reviews|length) > 0 %}
+                                    {% for j in 0..2-submissions[i].reviews|length %}
+                                        {%if (submissions[i].reviews|length >= 0) and j!=0 %}
+                                            <tr>
+                                        {% endif %}
+                                            <td>
+                                                <form id="assignToReviewForm" action="/{{constant('ROOT')}}/AssignToReview/AssignToReview" method="post">
+                                                    <select name="assignedReview" class= "form-control bg-dark text-white btn-outline-light">
+                                                        {% if reviewers|length > 0 %}
+                                                        {% for k in 0..reviewers|length-1 %}
+                                                        <option value="{{reviewers[k].id}}/{{submissions[i].id}}" class="bg-dark text-white">{{reviewers[k].first_name}}</option>
+                                                        {% endfor %}
+                                                        {% endif %}
+                                                    </select>
+                                                </form>
+                                            </td>
+                                            <td colspan="7">
+                                                <input type="submit" class="nav-link btn btn-outline-light" value="Assign to review" form="assignToReviewForm">
+                                            </td>
+                                        {% if (submissions[i].reviews|length <= 0) and j==0 %}
+                                            <td rowspan="3">
+                                                {{submissions[i].accepted}}
+                                            </td>
+                                            <td rowspan="3">
+                                                <form action="/{{constant('ROOT')}}/AssignToReview/Accept" method="post" >
+                                                    <input type="text" name="submissionToAcceptId" hidden value="{{submissions[i].id}}">
+                                                    <input type="submit" class="nav-link btn btn-outline-light" value="Accept">
+                                                </form>
+                                            </td>
+                                            <td rowspan="3">
+                                                <form action="/{{constant('ROOT')}}/AssignToReview/Deny" method="post">
+                                                    <input type="text" name="submissionToDenyId" hidden value="{{submissions[i].id}}">
+                                                    <input type="submit" class="nav-link btn btn-outline-light" value="Deny">
+                                                </form>
+                                            </td>
+                                        {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                            {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+
+

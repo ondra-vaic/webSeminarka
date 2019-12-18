@@ -25,6 +25,7 @@ define("DB_PASSWORD", '');
 define("USER_TABLE", 'users');
 define("SUBMISSIONS_TABLE", 'submissions');
 define("RIGHTS_TABLE", 'rights');
+define("REVIEWS_TABLE", 'reviews');
 define("MAX_UPLOAD_SIZE", 20000000);
 define("TECHNICAL_FAILURE_MESSAGE", 'There has been a technical failure, please try again.');
 

@@ -26,6 +26,20 @@ class Utils
         return $_SESSION['userId'];
     }
 
+    public static function GetUserName(){
+        if(self::IsLoggedIn()){
+            return Database::GetInstance()->Select(USER_TABLE, 'username', 'id = ?', [self::UserId()])[0]->username;
+        }
+        return "";
+    }
+
+    public static function GetAuthorizationTag($rightsId){
+        if(self::IsLoggedIn()) {
+            return Database::GetInstance()->Select(RIGHTS_TABLE, 'tag', 'rightsId = ?', [$rightsId])[0]->tag;
+        }
+        return "visitor";
+    }
+
     public static function GetUserByUserName($userName){
         return Database::GetInstance()->Select(USER_TABLE, '*', 'username = ?', [$userName]);
     }

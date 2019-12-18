@@ -22,11 +22,13 @@ class SetRights extends Controller
     }
 
     public function SetRight($id, $rightsId){
-        if($this->getModel()->SetRights($id, $rightsId) !== false){
-            Utils::Redirect('SetRights');
-        }else{
-            $this->getModel()->SetElement('errors', ['Could not set right, please try again.']);
+        if(ctype_digit($id))
+        {
+            if($this->getModel()->SetRights($id, $rightsId) !== false){
+                Utils::Redirect('SetRights');
+                return;
+            }
         }
+        $this->getModel()->SetElement('errors', ['Could not set right, please try again.']);
     }
-
 }
