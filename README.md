@@ -10,3 +10,5 @@
 * Přihlášený recenzent vidí příspěvky, které mu byly přiděleny k recenzi, a může je hodnotit (nutně alespoň 3 kritéria hodnocení). Pokud příspěvek nebyl dosud publikován, tak své hodnocení může změnit.
 * Přihlášený administrátor spravuje uživatele (určuje jejich role a může uživatele zablokovat či smazat), přiřazuje neschválené příspěvky recenzentům k hodnocení (každý příspěvek bude recenzován minimálně třemi recenzenty) a na základě recenzí rozhoduje o publikování nebo odmítnutí příspěvku. Publikované příspěvky jsou automaticky zobrazovány ve veřejné části webu.
 * Webová stránka komunikuje s MYSQL databází.
+* HTML část byla vytvářena s frameworkerm Bootstrap.
+* PHP část využívá MVC architekturu a podle zadání nebyl využit žádný framework.
